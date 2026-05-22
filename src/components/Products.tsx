@@ -1,85 +1,99 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const products = [
   {
     name: "Pains artisanaux",
     description:
-      "Pain de campagne, baguette tradition, pain de seigle, pain aux céréales… Cuits sur sole pour une croûte bien dorée.",
+      "Pain de campagne, baguette tradition, pain de seigle, pain aux c&eacute;r&eacute;ales&hellip; Cuits sur sole pour une cro&ucirc;te bien dor&eacute;e.",
     image:
-      "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=600&q=80",
-    tag: "Spécialité",
+      "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=800&q=80",
+    tag: "Sp&eacute;cialit&eacute;",
   },
   {
     name: "Viennoiseries",
     description:
-      "Croissants pur beurre, pains au chocolat, pains aux raisins et brioches feuilletées préparés chaque matin.",
+      "Croissants pur beurre, pains au chocolat, pains aux raisins et brioches feuillet&eacute;es pr&eacute;par&eacute;s chaque matin.",
     image:
-      "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80",
-    tag: "Coup de cœur",
+      "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80",
+    tag: "Coup de c&oelig;ur",
   },
   {
-    name: "Pâtisseries",
+    name: "G&acirc;teaux sur commande",
     description:
-      "Tartes, éclairs, mille-feuilles et entremets de saison. Des créations gourmandes qui raviront petits et grands.",
+      "Anniversaires, mariages, occasions sp&eacute;ciales&hellip; Nous r&eacute;alisons vos g&acirc;teaux personnalis&eacute;s avec soin.",
     image:
-      "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=600&q=80",
-    tag: "Gourmandise",
-  },
-  {
-    name: "Gâteaux sur commande",
-    description:
-      "Anniversaires, mariages, occasions spéciales… Nous réalisons vos gâteaux personnalisés sur commande.",
-    image:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80",
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
     tag: "Sur commande",
+    id: "gateau",
   },
 ];
 
 export default function Products() {
   return (
-    <section id="produits" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section id="produits" className="py-24 bg-cream">
+      <div className="container mx-auto px-4 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <span className="text-brand-400 font-semibold text-sm uppercase tracking-widest">
             Ce que nous proposons
           </span>
-          <h2 className="section-title mt-2">Nos produits</h2>
+          <h2 className="section-title mt-3">Nos produits</h2>
           <p className="section-subtitle">
-            Des produits faits maison chaque jour, avec des ingrédients de qualité
-            et tout le soin d&apos;un artisan passionné.
+            Des produits faits maison chaque jour, avec des ingr&eacute;dients de qualit&eacute;
+            et tout le soin d&apos;un artisan passion&eacute;.
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Grid — 3 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
           {products.map((product) => (
-            <div
+            <article
               key={product.name}
-              className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-stone-100"
+              id={product.id}
+              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-400 border border-stone-100"
             >
               <div className="relative overflow-hidden aspect-[4/3]">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-108 transition-transform duration-600"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
-                <span className="absolute top-3 left-3 bg-brand-400 text-white text-xs font-semibold px-3 py-1 rounded-full z-10">
-                  {product.tag}
-                </span>
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span
+                  className="absolute top-4 left-4 bg-brand-400 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md uppercase tracking-wide"
+                  dangerouslySetInnerHTML={{ __html: product.tag }}
+                />
               </div>
-              <div className="p-5">
-                <h3 className="font-bold text-stone-900 text-lg mb-2">
-                  {product.name}
-                </h3>
-                <p className="text-stone-500 text-sm leading-relaxed">
-                  {product.description}
-                </p>
+              <div className="p-7 lg:p-8">
+                <h3
+                  className="font-bold text-stone-900 text-xl mb-3"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  dangerouslySetInnerHTML={{ __html: product.name }}
+                />
+                <p
+                  className="text-stone-500 text-sm leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                />
               </div>
-            </div>
+            </article>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-14">
+          <Link
+            href="/produits"
+            className="inline-flex items-center gap-2 btn-primary px-8 py-4 text-base"
+          >
+            Voir tous nos produits
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

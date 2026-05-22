@@ -5,23 +5,25 @@ const products = [
   {
     name: "Pains artisanaux",
     description:
-      "Pain de campagne, baguette tradition, pain de seigle, pain aux c&eacute;r&eacute;ales&hellip; Cuits sur sole pour une cro&ucirc;te bien dor&eacute;e.",
+      "Pain de campagne, baguette tradition, pain de seigle, pain aux céréales… Cuits sur sole pour une croûte bien dorée.",
     image:
       "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=800&q=80",
-    tag: "Sp&eacute;cialit&eacute;",
+    tag: "Spécialité",
+    id: undefined as string | undefined,
   },
   {
     name: "Viennoiseries",
     description:
-      "Croissants pur beurre, pains au chocolat, pains aux raisins et brioches feuillet&eacute;es pr&eacute;par&eacute;s chaque matin.",
+      "Croissants pur beurre, pains au chocolat, pains aux raisins et brioches feuilletées préparés chaque matin.",
     image:
       "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80",
-    tag: "Coup de c&oelig;ur",
+    tag: "Coup de cœur",
+    id: undefined as string | undefined,
   },
   {
-    name: "G&acirc;teaux sur commande",
+    name: "Gâteaux sur commande",
     description:
-      "Anniversaires, mariages, occasions sp&eacute;ciales&hellip; Nous r&eacute;alisons vos g&acirc;teaux personnalis&eacute;s avec soin.",
+      "Anniversaires, mariages, occasions spéciales… Nous réalisons vos gâteaux personnalisés avec soin.",
     image:
       "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
     tag: "Sur commande",
@@ -51,33 +53,32 @@ export default function Products() {
             <article
               key={product.name}
               id={product.id}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-400 border border-stone-100"
+              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-stone-100"
             >
               <div className="relative overflow-hidden aspect-[4/3]">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-cover group-hover:scale-108 transition-transform duration-600"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span
-                  className="absolute top-4 left-4 bg-brand-400 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md uppercase tracking-wide"
-                  dangerouslySetInnerHTML={{ __html: product.tag }}
-                />
+                <span className="absolute top-4 left-4 bg-brand-400 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-md uppercase tracking-wide">
+                  {product.tag}
+                </span>
               </div>
               <div className="p-7 lg:p-8">
                 <h3
                   className="font-bold text-stone-900 text-xl mb-3"
                   style={{ fontFamily: "'Playfair Display', serif" }}
-                  dangerouslySetInnerHTML={{ __html: product.name }}
-                />
-                <p
-                  className="text-stone-500 text-sm leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: product.description }}
-                />
+                >
+                  {product.name}
+                </h3>
+                <p className="text-stone-500 text-sm leading-relaxed">
+                  {product.description}
+                </p>
               </div>
             </article>
           ))}

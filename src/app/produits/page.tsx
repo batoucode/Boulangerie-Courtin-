@@ -1,239 +1,267 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
+import { useState } from "react";
 
-export const metadata: Metadata = {
-  title: "Nos Produits — Boulangerie Courtin",
-  description:
-    "Découvrez toutes les créations artisanales de la Boulangerie Courtin à Bracieux : pains, viennoiseries, pâtisseries et gâteaux sur commande.",
-};
+const ALL_LABEL = "Tous";
+
+type Category = "Pains" | "Viennoiseries" | "Pâtisseries" | "Gâteaux";
+type TabLabel = typeof ALL_LABEL | Category;
+
+const TABS: TabLabel[] = [ALL_LABEL, "Pains", "Viennoiseries", "Pâtisseries", "Gâteaux"];
 
 type Product = {
   name: string;
   description: string;
   image: string;
-  category: "Pains" | "Viennoiseries" | "Pâtisseries" | "Gâteaux";
+  category: Category;
 };
 
 const products: Product[] = [
-  // Pains
   {
-    name: "Baguette Tradition",
-    description: "Cuite sur sole, dorée à souhait. Notre baguette tradition est préparée selon la méthode artisanale.",
+    name: "Baguette tradition",
+    category: "Pains",
     image: "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=800&q=80",
-    category: "Pains",
+    description:
+      "Notre baguette signature, croustillante et savoureuse, pétrie et façonnée à la main chaque matin.",
   },
   {
-    name: "Pain de Campagne",
-    description: "Mie alvéolée, croûte rustique. Le grand classique de nos boulangers, cuit en four à sole.",
+    name: "Pain de campagne",
+    category: "Pains",
     image: "https://images.unsplash.com/photo-1574085733277-851d9d856a3a?w=800&q=80",
-    category: "Pains",
+    description:
+      "Pain rustique à la mie dense et parfumée, idéal pour accompagner tous vos repas.",
   },
   {
-    name: "Pain aux Céréales",
-    description: "Un mélange généreux de graines et céréales sélectionnées pour une saveur riche et un pain nutritif.",
+    name: "Pain aux céréales",
+    category: "Pains",
     image: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=800&q=80",
-    category: "Pains",
+    description:
+      "Mélange de céréales sélectionnées pour une saveur riche et une texture moelleuse.",
   },
-  // Viennoiseries
   {
-    name: "Croissant Pur Beurre",
-    description: "Feuilleté, croustillant, fondant. Nos croissants sont fabriqués avec un beurre de qualité supérieure.",
+    name: "Croissant",
+    category: "Viennoiseries",
     image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80",
-    category: "Viennoiseries",
+    description:
+      "Croissant pur beurre, feuilleté à la perfection, doré et croustillant.",
   },
   {
-    name: "Pain au Chocolat",
-    description: "Deux barres de chocolat noir enveloppées dans une pâte feuilletée beurrée et bien dorée.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    name: "Pain au chocolat",
     category: "Viennoiseries",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    description:
+      "Pâte feuilletée beurrée garnie de deux barres de chocolat noir de qualité.",
   },
   {
     name: "Brioche",
-    description: "Moelleuse, légèrement sucrée, avec une belle dorure. Notre brioche maison ravit petits et grands.",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
     category: "Viennoiseries",
+    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80",
+    description:
+      "Brioche moelleuse et dorée, préparée avec du beurre frais et des oeufs.",
   },
-  // Pâtisseries
   {
-    name: "Éclair au Chocolat",
-    description: "Pâte à choux garnie d'une crème pâtissière onctueuse et nappée d'un glaçage au chocolat noir.",
+    name: "Éclair chocolat",
+    category: "Pâtisseries",
     image: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800&q=80",
-    category: "Pâtisseries",
+    description:
+      "Pâte à choux garnie de crème pâtissière au chocolat et nappée de fondant.",
   },
   {
-    name: "Tarte aux Fruits",
-    description: "Fond de tarte sablé, crème pâtissière et fruits de saison frais. Une fraîcheur incomparable.",
-    image: "https://images.unsplash.com/photo-1519915028121-7d3463d5b1ff?w=800&q=80",
+    name: "Tarte aux fruits",
     category: "Pâtisseries",
+    image: "https://images.unsplash.com/photo-1519915028121-7d3463d5b1ff?w=800&q=80",
+    description:
+      "Fond de tarte sablé, crème pâtissière onctueuse et fruits frais de saison.",
   },
   {
     name: "Mille-feuille",
-    description: "Trois couches de pâte feuilletée caramélisée, garnies d'une crème diplomate à la vanille.",
-    image: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=800&q=80",
     category: "Pâtisseries",
+    image: "https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=800&q=80",
+    description:
+      "Feuilletage caramélisé alterné avec une généreuse crème mousseline à la vanille.",
   },
-  // Gâteaux
   {
-    name: "Gâteau d'Anniversaire",
-    description: "Personnalisé selon vos envies, réalisé avec des ingrédients frais. Sur commande uniquement.",
+    name: "Gâteau décoré",
+    category: "Gâteaux",
     image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
-    category: "Gâteaux",
+    description:
+      "Gâteaux sur mesure conçus avec soin pour vos anniversaires et célébrations.",
   },
   {
-    name: "Letter Cake",
-    description: "Gâteau lettres décoré de crème, fleurs et fruits. Idéal pour les anniversaires et occasions spéciales.",
-    image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80",
+    name: "Letter cake",
     category: "Gâteaux",
+    image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80",
+    description:
+      "Gâteau lettre personnalisé, décoré de fleurs et de gourmandises assorties.",
   },
   {
     name: "Macarons",
-    description: "Assortiment de macarons aux saveurs variées. Disponibles à la pièce ou en coffret cadeau.",
+    category: "Pâtisseries",
     image: "https://images.unsplash.com/photo-1558326567-98ae2405596b?w=800&q=80",
-    category: "Gâteaux",
+    description:
+      "Coques légères et colorées, garnies de ganaches et crèmes raffinées.",
   },
 ];
 
-const categories = ["Pains", "Viennoiseries", "Pâtisseries", "Gâteaux"] as const;
-
-const categoryColors: Record<Product["category"], string> = {
+const categoryBadgeColor: Record<Category, string> = {
   Pains: "bg-amber-700",
   Viennoiseries: "bg-brand-400",
-  Pâtisseries: "bg-rose-500",
-  Gâteaux: "bg-violet-500",
+  "Pâtisseries": "bg-rose-500",
+  "Gâteaux": "bg-violet-500",
 };
 
 export default function ProduitsPage() {
+  const [activeTab, setActiveTab] = useState<TabLabel>(ALL_LABEL);
+
+  const filtered =
+    activeTab === ALL_LABEL
+      ? products
+      : products.filter((p) => p.category === activeTab);
+
   return (
     <div className="pt-20">
-      {/* Hero */}
-      <section className="relative py-24 overflow-hidden bg-stone-900">
+      {/* Page Hero */}
+      <section className="relative py-28 overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80')",
+              "url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1600&q=80')",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-stone-900/80 to-stone-900/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-stone-900/70 to-stone-950/80" />
         <div className="relative container mx-auto px-4 text-center text-white">
-          <span className="inline-block bg-brand-400/20 border border-brand-400/40 text-brand-200 text-sm font-medium px-5 py-2 rounded-full mb-6">
-            Fait maison chaque jour
+          <span className="inline-block bg-brand-400/20 border border-brand-400/50 text-brand-200 text-sm font-medium px-5 py-2 rounded-full mb-6 tracking-wide">
+            Fait maison chaque matin
           </span>
           <h1
-            className="text-4xl md:text-6xl font-bold"
+            className="text-4xl md:text-6xl font-bold leading-tight mb-5"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Nos Créations
+            Nos Cr&eacute;ations
           </h1>
-          <p className="mt-4 text-xl text-white/75 max-w-2xl mx-auto">
-            Du four à votre table — pains, viennoiseries, pâtisseries et gâteaux
-            préparés chaque matin avec des ingrédients soigneusement choisis.
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+            D&eacute;couvrez l&apos;ensemble de nos pains, viennoiseries, p&acirc;tisseries et
+            g&acirc;teaux, pr&eacute;par&eacute;s avec passion par notre &eacute;quipe d&apos;artisans.
           </p>
         </div>
       </section>
 
-      {/* Products by category */}
-      <div className="bg-cream">
-        {categories.map((cat, catIndex) => {
-          const catProducts = products.filter((p) => p.category === cat);
-          return (
-            <section
-              key={cat}
-              id={cat.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")}
-              className={catIndex % 2 === 0 ? "py-20 bg-cream" : "py-20 bg-white"}
-            >
-              <div className="container mx-auto px-4 lg:px-8">
-                {/* Category header */}
-                <div className="flex items-center gap-4 mb-12">
-                  <span
-                    className={`w-3 h-10 rounded-full ${categoryColors[cat]}`}
-                  />
-                  <div>
-                    <h2
-                      className="text-3xl md:text-4xl font-bold text-stone-900"
-                      style={{ fontFamily: "'Playfair Display', serif" }}
-                    >
-                      {cat}
-                    </h2>
-                    <p className="text-stone-500 text-sm mt-1">
-                      {catProducts.length} produit{catProducts.length > 1 ? "s" : ""}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Products grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {catProducts.map((product) => (
-                    <div
-                      key={product.name}
-                      className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100"
-                    >
-                      <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <span
-                          className={`absolute top-4 left-4 ${categoryColors[product.category]} text-white text-xs font-semibold px-3 py-1.5 rounded-full z-10 shadow-md`}
-                        >
-                          {product.category}
-                        </span>
-                      </div>
-                      <div className="p-6">
-                        <h3
-                          className="font-bold text-stone-900 text-lg mb-2"
-                          style={{ fontFamily: "'Playfair Display', serif" }}
-                        >
-                          {product.name}
-                        </h3>
-                        <p className="text-stone-500 text-sm leading-relaxed">
-                          {product.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          );
-        })}
+      {/* Category Tabs — sticky below header */}
+      <div className="sticky top-20 z-30 bg-white border-b border-stone-200 shadow-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center gap-2 overflow-x-auto py-3 no-scrollbar">
+            {TABS.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`whitespace-nowrap px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 shrink-0 ${
+                  activeTab === tab
+                    ? "bg-brand-400 text-white shadow-md"
+                    : "text-stone-600 hover:text-brand-500 hover:bg-brand-50"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* CTA */}
-      <section className="py-20 bg-stone-900 text-white text-center">
-        <div className="container mx-auto px-4">
-          <span className="inline-block bg-brand-400/20 border border-brand-400/40 text-brand-200 text-sm font-medium px-5 py-2 rounded-full mb-6">
-            Commandes spéciales
+      {/* Gallery */}
+      <section className="py-16 bg-cream min-h-[60vh]">
+        <div className="container mx-auto px-4 lg:px-8">
+          {/* Section heading */}
+          <div className="mb-10">
+            <h2
+              className="text-2xl md:text-3xl font-bold text-stone-900"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              {activeTab === ALL_LABEL ? "Toute notre gamme" : activeTab}
+            </h2>
+            <p className="text-stone-500 mt-1 text-sm">
+              {filtered.length} produit{filtered.length > 1 ? "s" : ""}
+            </p>
+          </div>
+
+          {/* Product grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filtered.map((product) => (
+              <article
+                key={product.name}
+                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-100"
+              >
+                <div className="relative overflow-hidden aspect-[4/3]">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                  />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {/* Category badge */}
+                  <span
+                    className={`absolute top-3 left-3 ${categoryBadgeColor[product.category]} text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-sm uppercase tracking-wide`}
+                  >
+                    {product.category}
+                  </span>
+                </div>
+                <div className="p-5">
+                  <h3
+                    className="font-bold text-stone-900 text-lg mb-2 leading-snug"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
+                  >
+                    {product.name}
+                  </h3>
+                  <p className="text-stone-500 text-sm leading-relaxed line-clamp-2">
+                    {product.description}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-20 bg-white border-t border-stone-100">
+        <div className="container mx-auto px-4 text-center max-w-2xl">
+          <span className="inline-block text-brand-400 font-semibold text-sm uppercase tracking-widest mb-4">
+            Commande personnalis&eacute;e
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold"
+            className="text-3xl md:text-4xl font-bold text-stone-900 mb-5"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Commander un gâteau sur mesure
+            Commander un g&acirc;teau sur mesure
           </h2>
-          <p className="mt-4 text-stone-400 max-w-xl mx-auto text-lg leading-relaxed">
-            Anniversaires, mariages, baptêmes… Contactez-nous à l&apos;avance pour
-            que nous puissions créer votre gâteau personnalisé.
+          <p className="text-stone-500 text-lg mb-8 leading-relaxed">
+            Anniversaire, mariage, bapt&ecirc;me&hellip; Nous cr&eacute;ons votre g&acirc;teau unique
+            avec les saveurs et la d&eacute;coration de votre choix.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="btn-primary text-base px-8 py-4">
-              Faire une demande
-            </Link>
-            <a
-              href="tel:+33254464187"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-stone-600 text-stone-300 font-semibold rounded-lg hover:border-brand-400 hover:text-brand-400 transition-colors duration-200 text-base"
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 btn-primary px-8 py-4 text-base"
+          >
+            Nous contacter pour une commande
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              02 54 46 41 87
-            </a>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </Link>
         </div>
       </section>
     </div>

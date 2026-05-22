@@ -6,8 +6,7 @@ const products = [
     name: "Pains artisanaux",
     description:
       "Pain de campagne, baguette tradition, pain de seigle, pain aux céréales… Cuits sur sole pour une croûte bien dorée.",
-    image:
-      "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=800&q=80",
+    image: "/photos/pain-cereales.png",
     tag: "Spécialité",
     id: undefined as string | undefined,
   },
@@ -15,8 +14,7 @@ const products = [
     name: "Viennoiseries",
     description:
       "Croissants pur beurre, pains au chocolat, pains aux raisins et brioches feuilletées préparés chaque matin.",
-    image:
-      "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80",
+    image: "/photos/viennoiseries.png",
     tag: "Coup de cœur",
     id: undefined as string | undefined,
   },
@@ -24,8 +22,7 @@ const products = [
     name: "Gâteaux sur commande",
     description:
       "Anniversaires, mariages, occasions spéciales… Nous réalisons vos gâteaux personnalisés avec soin.",
-    image:
-      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80",
+    image: "/photos/gateau-anniversaire.png",
     tag: "Sur commande",
     id: "gateau",
   },

@@ -8,7 +8,7 @@ export default function Hero() {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=1600&q=80')",
+            "url('/photos/viennoiseries.png')",
         }}
       />
       {/* Dark overlay */}

@@ -91,7 +91,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200"
           >
-            <span className="text-sm text-stone-400 font-medium">Conçu par</span>
+            <span className="text-sm text-stone-400 font-medium">Site conçu par :</span>
             <span className="text-base font-bold tracking-tight">
               <span style={{ color: "#f97316" }}>Des</span><span style={{ color: "#3b82f6" }}>Codes</span>
             </span>

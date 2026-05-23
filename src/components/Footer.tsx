@@ -83,8 +83,22 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-stone-800 mt-10 pt-6 text-center text-xs">
+        <div className="border-t border-stone-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
           <p>© {year} Boulangerie Courtin — Bracieux. Tous droits réservés.</p>
+          <a
+            href="https://www.descodes.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-stone-500 hover:text-stone-300 transition-colors duration-200"
+          >
+            <span>Conçu par</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://www.descodes.com/images/logos/descodes-logo-dark.svg"
+              alt="DesCodes"
+              className="h-4 w-auto opacity-60 hover:opacity-100 transition-opacity duration-200"
+            />
+          </a>
         </div>
       </div>
     </footer>

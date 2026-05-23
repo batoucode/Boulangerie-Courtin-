@@ -83,23 +83,18 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-stone-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
-          <p>© {year} Boulangerie Courtin — Bracieux. Tous droits réservés.</p>
+        <div className="border-t border-stone-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-stone-500">© {year} Boulangerie Courtin — Bracieux. Tous droits réservés.</p>
           <a
             href="https://www.descodes.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3 bg-stone-800 hover:bg-stone-700 border border-stone-700 hover:border-brand-400/50 rounded-xl px-4 py-2.5 transition-all duration-200"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity duration-200"
           >
-            <span className="text-stone-400 group-hover:text-stone-200 text-xs font-medium whitespace-nowrap transition-colors">
-              Conçu par
+            <span className="text-sm text-stone-400 font-medium">Conçu par</span>
+            <span className="text-base font-bold tracking-tight">
+              <span style={{ color: "#f97316" }}>Des</span><span style={{ color: "#3b82f6" }}>Codes</span>
             </span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://www.descodes.com/images/logos/descodes-logo-dark.svg"
-              alt="DesCodes"
-              className="h-5 w-auto brightness-75 group-hover:brightness-110 transition-all duration-200"
-            />
           </a>
         </div>
       </div>

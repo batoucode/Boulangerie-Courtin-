@@ -83,20 +83,22 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-stone-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <div className="border-t border-stone-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
           <p>© {year} Boulangerie Courtin — Bracieux. Tous droits réservés.</p>
           <a
             href="https://www.descodes.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-stone-500 hover:text-stone-300 transition-colors duration-200"
+            className="group flex items-center gap-3 bg-stone-800 hover:bg-stone-700 border border-stone-700 hover:border-brand-400/50 rounded-xl px-4 py-2.5 transition-all duration-200"
           >
-            <span>Conçu par</span>
+            <span className="text-stone-400 group-hover:text-stone-200 text-xs font-medium whitespace-nowrap transition-colors">
+              Conçu par
+            </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://www.descodes.com/images/logos/descodes-logo-dark.svg"
               alt="DesCodes"
-              className="h-4 w-auto opacity-60 hover:opacity-100 transition-opacity duration-200"
+              className="h-5 w-auto brightness-75 group-hover:brightness-110 transition-all duration-200"
             />
           </a>
         </div>

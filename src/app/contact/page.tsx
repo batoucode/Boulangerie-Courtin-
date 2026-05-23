@@ -92,9 +92,10 @@ export default function ContactPage() {
                     <div>
                       <p className="font-semibold text-stone-800">Horaires</p>
                       <div className="text-stone-600 text-sm space-y-1 mt-1">
-                        <p>Lundi — Vendredi : 7h00 – 13h00 / 15h00 – 19h00</p>
-                        <p>Samedi : 7h00 – 13h00</p>
-                        <p>Dimanche : 7h00 – 12h30</p>
+                        <p>Lun, Mar, Jeu, Ven : 7h00 – 13h00 / 15h30 – 19h00</p>
+                        <p>Samedi : 7h00 – 13h00 / 15h30 – 19h00</p>
+                        <p>Dimanche : 7h00 – 13h00</p>
+                        <p className="text-red-400 font-medium">Mercredi : Fermé</p>
                       </div>
                     </div>
                   </li>

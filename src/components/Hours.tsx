@@ -1,11 +1,11 @@
 const hours = [
-  { day: "Lundi", morning: "7h00 – 13h00", afternoon: "15h00 – 19h00", open: true },
-  { day: "Mardi", morning: "7h00 – 13h00", afternoon: "15h00 – 19h00", open: true },
-  { day: "Mercredi", morning: "7h00 – 13h00", afternoon: "15h00 – 19h00", open: true },
-  { day: "Jeudi", morning: "7h00 – 13h00", afternoon: "15h00 – 19h00", open: true },
-  { day: "Vendredi", morning: "7h00 – 13h00", afternoon: "15h00 – 19h00", open: true },
-  { day: "Samedi", morning: "7h00 – 13h00", afternoon: null, open: true },
-  { day: "Dimanche", morning: "7h00 – 12h30", afternoon: null, open: true },
+  { day: "Lundi",    morning: "7h00 – 13h00", afternoon: "15h30 – 19h00", open: true },
+  { day: "Mardi",    morning: "7h00 – 13h00", afternoon: "15h30 – 19h00", open: true },
+  { day: "Mercredi", morning: null,            afternoon: null,            open: false },
+  { day: "Jeudi",    morning: "7h00 – 13h00", afternoon: "15h30 – 19h00", open: true },
+  { day: "Vendredi", morning: "7h00 – 13h00", afternoon: "15h30 – 19h00", open: true },
+  { day: "Samedi",   morning: "7h00 – 13h00", afternoon: "15h30 – 19h00", open: true },
+  { day: "Dimanche", morning: "7h00 – 13h00", afternoon: null,            open: true },
 ];
 
 export default function Hours() {
@@ -25,9 +25,8 @@ export default function Hours() {
               Horaires d&apos;ouverture
             </h2>
             <p className="mt-4 text-stone-400 leading-relaxed">
-              Nous sommes ouverts toute la semaine pour vous accueillir avec des
-              produits frais du jour. N&apos;hésitez pas à nous appeler pour les
-              commandes spéciales.
+              Ouvert 6 jours sur 7 — fermé le mercredi. N&apos;hésitez pas à nous
+              appeler pour les commandes spéciales.
             </p>
 
             <a

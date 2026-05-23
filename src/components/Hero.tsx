@@ -82,7 +82,7 @@ export default function Hero() {
                 </svg>
                 <div>
                   <p className="text-white font-semibold text-sm">Ouvert d&egrave;s 7h00</p>
-                  <p className="text-white/60 text-xs mt-0.5">Du lundi au dimanche</p>
+                  <p className="text-white/60 text-xs mt-0.5">Fermé le mercredi</p>
                 </div>
               </div>
             </div>

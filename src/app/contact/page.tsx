@@ -31,15 +31,37 @@ export default function ContactPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Contact form */}
-            <div>
-              <h2
-                className="text-2xl font-bold text-stone-900 mb-6"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Envoyez-nous un message
-              </h2>
-              <ContactForm />
+            {/* Contact form — désactivé en attente de configuration email */}
+            <div className="relative">
+              <div className="blur-sm pointer-events-none select-none" aria-hidden="true">
+                <h2
+                  className="text-2xl font-bold text-stone-900 mb-6"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  Envoyez-nous un message
+                </h2>
+                <ContactForm />
+              </div>
+              {/* Overlay "bientôt disponible" */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-2xl">
+                <div className="bg-white border border-stone-200 shadow-lg rounded-2xl px-8 py-6 text-center max-w-xs">
+                  <span className="text-3xl mb-3 block">🔧</span>
+                  <h3 className="font-bold text-stone-900 text-lg mb-2">Bientôt disponible</h3>
+                  <p className="text-stone-500 text-sm leading-relaxed">
+                    Le formulaire de contact sera activé très prochainement.<br />
+                    En attendant, appelez-nous directement.
+                  </p>
+                  <a
+                    href="tel:+33254464187"
+                    className="mt-4 btn-primary w-full text-sm py-3 inline-flex items-center justify-center gap-2"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    02 54 46 41 87
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* Info + Map */}

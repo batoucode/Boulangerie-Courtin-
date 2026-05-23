@@ -63,7 +63,14 @@ export default function Footer() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>7 Place de la Halle<br />41250 Bracieux</span>
+                <a
+                  href="https://maps.google.com/?q=7+Place+de+la+Halle+41250+Bracieux"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-brand-400 transition-colors"
+                >
+                  7 Place de la Halle<br />41250 Bracieux
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <svg className="w-4 h-4 text-brand-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">

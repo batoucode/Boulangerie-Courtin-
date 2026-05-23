@@ -61,8 +61,14 @@ export default function ContactPage() {
                     </span>
                     <div>
                       <p className="font-semibold text-stone-800">Adresse</p>
-                      <p className="text-stone-600">7 Place de la Halle</p>
-                      <p className="text-stone-600">41250 Bracieux</p>
+                      <a
+                        href="https://maps.google.com/?q=7+Place+de+la+Halle+41250+Bracieux"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-brand-500 hover:text-brand-600 transition-colors"
+                      >
+                        7 Place de la Halle<br />41250 Bracieux
+                      </a>
                     </div>
                   </li>
 

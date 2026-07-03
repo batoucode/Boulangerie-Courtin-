@@ -91,7 +91,15 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-stone-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-stone-500">© {year} Boulangerie Courtin — Bracieux. Tous droits réservés.</p>
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-xs text-stone-500">
+            <p>© {year} Boulangerie Courtin — Bracieux. Tous droits réservés.</p>
+            <Link
+              href="/mentions-legales"
+              className="hover:text-brand-400 transition-colors underline underline-offset-2"
+            >
+              Mentions légales
+            </Link>
+          </div>
           <a
             href="https://www.descodes.com"
             target="_blank"
